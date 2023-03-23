@@ -33,8 +33,19 @@ const frogpack = {
   },
 };
 
+const addFig = ( description ) => {
+  let newFig = document.createElement("figure")
+  let newImg = document.createElement("img")
+  newImg.src = "../../assets/images/everyday.svg"
+  newImg.alt = description
+  newImg.loading = "lazy"
+  newFig.append(newImg)
+  return newFig.outerHTML
+}
+
 // Baseline HTML output
 const content = `
+   
     <h1 class="backpack__name">${frogpack.name}</h1>
     <ul class="backpack__features">
       <li class="packprop backpack__volume">Volume:<span> ${
@@ -55,5 +66,32 @@ const content = `
       <li class="feature backpack__lid">Lid status:<span> ${
         frogpack.lidOpen ? "open" : "closed"
       }</span></li>
+      ${addFig("description")}
     </ul>  
 `;
+
+const main = document.querySelector("main")
+main.innerHTML = content
+// main.append(addFig("description"))
+
+
+const formatProperty = ( value ) => {
+  let newElem = document.createElement("li")
+  newElem.innerHTML = `
+    Element requested: ${frogpack[value]}
+  `
+  return newElem
+}
+
+const displayProperty = ( value ) => {
+  let newArticle = document.createElement("article")
+
+  newArticle.append(formatProperty(value[0]))
+  newArticle.append(formatProperty(value[1]))
+  newArticle.append(formatProperty(value[2]))
+  newArticle.append(formatProperty(value[3]))
+
+  return newArticle
+}
+
+main.append(displayProperty(["name", "volume", "color", "pocketNum"]))

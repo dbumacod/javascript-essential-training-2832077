@@ -53,8 +53,15 @@ const newStrapLength = (strapArray) => {
       <button>Update</button>
     `;
 
+    lengthForm.addEventListener("submit", (event) => {
+      event.preventDefault()
+    })
+
     // Add form to the end of the list element
     listElement.append(lengthForm);
+
+    
+    
   });
 };
 
@@ -102,6 +109,25 @@ const backpackList = backpackObjectArray.map((backpack) => {
   button.addEventListener("click", (event) => {
     lidToggle(event, button, newArg);
   });
+
+
+
+  let leftButton = backpackArticle.querySelector(".leftlength button")
+  let rightButton = backpackArticle.querySelector(".rightlength button")
+  console.log(leftButton)
+  console.log(rightButton)
+
+  rightButton.addEventListener("click", (event) => {
+    console.log("right works");
+    let val =  rightButton.parentElement.parentElement.querySelector("input").value
+    rightButton.parentElement.parentElement.querySelector("span").innerText = val + " inches"
+  })
+
+  leftButton.addEventListener("click", (event) => {
+    console.log("left works");
+    let val = leftButton.parentElement.parentElement.querySelector("input").value
+    leftButton.parentElement.parentElement.querySelector("span").innerText = val + " inches"
+  })
 
   return backpackArticle;
 });
